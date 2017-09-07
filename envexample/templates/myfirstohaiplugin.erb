@@ -1,0 +1,11 @@
+Ohai.plugin(:MyFirstOhaiPlugin) do
+  provides "myfirstohaiplugin"
+  collect_data(:default) do
+    myfirstohaiplugin Mash.new 
+    return nil unless File.exist?('/tmp/envdata')
+    File.read('/tmp/envdata').split.inject({}) do |map, line|
+      key, value = line.split("=") 
+      myfirstohaiplugin[key] = value
+    end
+  end
+end

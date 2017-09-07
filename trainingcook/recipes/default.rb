@@ -7,7 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 
-data_bag_obj=data_bag_item('3compproject','qa')
+
 cookbook_file '/tmp/firstsample.txt' do
   source 'test.txt'
   owner 'ec2-user'
@@ -18,17 +18,5 @@ end
 
 template '/tmp/templatefile' do
   source 'samp.erb'
-  variables( :tempVar => node['hostname'] )
-end
-
-template '/tmp/secondfile' do
-  source 'second.erb'
-  variables( :cookbookvar => data_bag_obj['ui']['port'] )
-end
-
-file '/tmp/newfile' do
-  content #{node['myvar']}
-  mode '0755'
-  owner 'ec2-user'
-  group 'ec2-user'
+  variables( :tempVar => node['tempVar'] )
 end
